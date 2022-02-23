@@ -1,6 +1,6 @@
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/LICENSE)
 
-# VariableAttributesExpand
+# VariableAttributesExtend
 
 add properties Variables can be collapsed, renamed, added with split lines and titles , Enumeration items can be individually hidden
 
