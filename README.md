@@ -5,13 +5,13 @@
 
 添加属性，可对变量进行折叠，重命名，添加分割线，添加标题操作，可对枚举项进行单独隐藏
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/StyleDark.png)
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/StyleLight.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/StyleDark.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/StyleLight.png)
 
 ## Default
 Displays the class in which the variable is declared
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/DrawClass.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/DrawClass.png)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class SampleBase : MonoBehaviour
 ```
 You can view the original variable name where the mouse hovers
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Mouse.gif)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Mouse.gif)
 
 ## How to use
 Add corresponding attributes to the displayable variables
@@ -30,7 +30,7 @@ Add corresponding attributes to the displayable variables
 ### Rename
 Rename the displayable variables
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Rename.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Rename.png)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
@@ -46,7 +46,7 @@ public class SampleBase : MonoBehaviour
 ### HorizontalLine
 Add a split line above the displayable variables
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Splitline.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Splitline.png)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
@@ -58,7 +58,7 @@ public class SampleBase : MonoBehaviour
 ### Title
 Add a title above the displayable variables
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Title.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Title.png)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
@@ -78,7 +78,7 @@ public class SampleBase : MonoBehaviour
 ### HideEnum
 Hide the enumeration item
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Enum.png)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Enum.png)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
@@ -102,7 +102,7 @@ public class SampleBase : MonoBehaviour
 ### Category
 Add categories to variable
 
-![Image](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/Image/Category.gif)
+![Image](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/Image/Category.gif)
 ```csharp
 public class SampleBase : MonoBehaviour
 {
