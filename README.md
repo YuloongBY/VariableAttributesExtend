@@ -2,6 +2,7 @@
 
 # VariableAttributesExpand
 
+add properties Variables can be collapsed, renamed, added with split lines and titles , Enumeration items can be individually hidden
 
 添加属性，可对变量进行折叠，重命名，添加分割线，添加标题操作，可对枚举项进行单独隐藏
 
