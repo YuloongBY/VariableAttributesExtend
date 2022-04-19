@@ -1,4 +1,4 @@
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/YuloongBY/VariableAttributesExpand/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/YuloongBY/VariableAttributesExtend/blob/main/LICENSE)
 
 # VariableAttributesExtend
 
