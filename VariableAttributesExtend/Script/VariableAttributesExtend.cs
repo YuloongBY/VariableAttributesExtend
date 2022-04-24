@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * The MIT License (MIT)
  *
  * Copyright (c) 2022 YuloongBY - Github: github.com/YuloongBY
@@ -50,7 +50,7 @@ public class CategoryAttribute : PropertyAttribute
     /// <param name="_name">Category name</param>
     /// <param name="_isFoldout">Whether the initial state is foldout or not</param>
     /// <param name="_useHorizontalLine">Add a split line above this category</param>   
-    /// <param name="_titleName">Add a title above this category £¬"null" means not to use the title</param>
+    /// <param name="_titleName">Add a title above this category ï¼Œ"null" means not to use the title</param>
     public CategoryAttribute(string _name, bool _isFoldout = false , bool _useHorizontalLine = false , string _titleName = null )
 	{
 		this.name_              = _name;
@@ -115,7 +115,7 @@ public class RenameAttribute : PropertyAttribute
 
     /// <summary> Rename </summary>
     /// <param name="_name">New name</param>
-    /// <param name="_htmlColor">Text color (For example£º"#FFFFFF" or "black")</param>
+    /// <param name="_htmlColor">Text color (For exampleï¼š"#FFFFFF" or "black")</param>
     public RenameAttribute(string _name, string _htmlColor)
     {
         this.name_      = _name;
@@ -156,7 +156,7 @@ public class TitleAttribute : PropertyAttribute
     /// Add a title above this variable
     /// </summary>
     /// <param name="_title">Title name</param>
-    /// <param name="_htmlColor">Text color (For example£º"#FFFFFF" or "black")</param>
+    /// <param name="_htmlColor">Text color (For exampleï¼š"#FFFFFF" or "black")</param>
     /// <param name="_useHorizontalLine">Add a split line above this title</param>
     public TitleAttribute(string _title, string _htmlColor, bool _useHorizontalLine = false )
     {
@@ -187,77 +187,77 @@ public class RenameDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
     {
-        //±£´æµ±Ç°ÑÕÉ«
+        //ä¿å­˜å½“å‰é¢œè‰²
         Color defaultColor = EditorStyles.label.normal.textColor;
 
-        // Ìæ»»ÊôĞÔÃû³Æ        
+        // æ›¿æ¢å±æ€§åç§°        
         if ( attribute is RenameAttribute )
         {
-            //ÖØÃüÃû
+            //é‡å‘½å
             RenameAttribute rename = (RenameAttribute)attribute;
             _label.text = rename.name_;
             
-            //ÖØ»æGUI
+            //é‡ç»˜GUI
             EditorStyles.label.normal.textColor = HtmlToColor.Change(rename.htmlColor_);
             bool isElement = Regex.IsMatch(_property.displayName, "Element \\d+");
             if (isElement) _label.text = _property.displayName;
         }
 
-        //Ã¶¾Ù
+        //æšä¸¾
         if (_property.propertyType == SerializedPropertyType.Enum)
         {
-            //Ã¶¾ÙÄÚµÄÖØÃüÃûºÍÒş²ØÊÇ·ñÉúĞ§
+            //æšä¸¾å†…çš„é‡å‘½åå’Œéšè—æ˜¯å¦ç”Ÿæ•ˆ
             bool isEnumEdit = attribute is OnlyEditEnumAttribute || attribute is RenameAttribute;
             DrawEnum(_position, _property, _label , isEnumEdit );
         }
-        //Ò»°ã
+        //ä¸€èˆ¬
         else
         { 
             EditorGUI.PropertyField(_position, _property, _label, true);                            
         }
 
-        //ÑÕÉ«ÖØÖÃ
+        //é¢œè‰²é‡ç½®
         EditorStyles.label.normal.textColor = defaultColor;
     }
 
     /// <summary>
-    /// »æÖÆÃ¶¾ÙÀàĞÍ
+    /// ç»˜åˆ¶æšä¸¾ç±»å‹
     /// </summary>
     private void DrawEnum(Rect _position, SerializedProperty _property, GUIContent _label , bool _isEditEnum )
     {
         EditorGUI.BeginChangeCheck();
 
-        // »ñÈ¡Ã¶¾ÙÏà¹ØÊôĞÔ
+        // è·å–æšä¸¾ç›¸å…³å±æ€§
         Type type = fieldInfo.FieldType;
         string[] names = _property.enumNames;
         string[] values = new string[names.Length];
         Array.Copy(names, values, names.Length);
         while (type.IsArray) type = type.GetElementType();
 
-        //Ã¶¾Ù¿É±à¼­
+        //æšä¸¾å¯ç¼–è¾‘
         if( _isEditEnum )
         {
             for (int i = 0; i < names.Length; i++)
             {
                 FieldInfo info = type.GetField(names[i]);
 
-                //Ã¶¾ÙÄÚÈİÊÇ·ñ±»Òş²Ø
+                //æšä¸¾å†…å®¹æ˜¯å¦è¢«éšè—
                 HideEnumAttribute hideAtr = info.GetCustomAttribute(typeof(HideEnumAttribute), true) as HideEnumAttribute;
                 if (hideAtr != null)
                 {
-                    //±»Òş²ØÔò½«ÆäÉèÖÃÎª¿Õ
+                    //è¢«éšè—åˆ™å°†å…¶è®¾ç½®ä¸ºç©º
                     values[i] = null;
                 }
                 else
                 {
-                    //Ã»ÓĞ±»Òş²ØÔòÖØÃüÃû
+                    //æ²¡æœ‰è¢«éšè—åˆ™é‡å‘½å
                     RenameAttribute[] renameAtts = (RenameAttribute[])info.GetCustomAttributes(typeof(RenameAttribute), true);
                     if (renameAtts.Length != 0) values[i] = renameAtts[0].name_;
                 }
             }
         }
 
-        //´´ÔìÏÔÊ¾Ã¶¾ÙÁĞ±í
+        //åˆ›é€ æ˜¾ç¤ºæšä¸¾åˆ—è¡¨
         List<string> drawEnum = new List<string>( values.Length );
         List<GUIContent> guiContentArray = new List<GUIContent>(values.Length);
         for ( int nCnt = 0 ; nCnt < values.Length ; nCnt ++ )
@@ -269,27 +269,27 @@ public class RenameDrawer : PropertyDrawer
             }            
         }
         
-        //ÏÔÊ¾Ã¶¾ÙË÷Òı³õÆÚÉèÖÃ
+        //æ˜¾ç¤ºæšä¸¾ç´¢å¼•åˆæœŸè®¾ç½®
         if( drawEnumIdx < 0 )
         {
-            //Èç¹û¸ÃË÷ÒıµÄÃ¶¾Ù¿ÉÒÔ±»ÏÔÊ¾Ôò´øÈëµ½ÏÔÊ¾Ã¶¾ÙË÷Òı£¬·ñÔòÎª0
+            //å¦‚æœè¯¥ç´¢å¼•çš„æšä¸¾å¯ä»¥è¢«æ˜¾ç¤ºåˆ™å¸¦å…¥åˆ°æ˜¾ç¤ºæšä¸¾ç´¢å¼•ï¼Œå¦åˆ™ä¸º0
             string value = values[ _property.enumValueIndex ];
             drawEnumIdx = value == null ? 0 : drawEnum.IndexOf(value);
         }
 
-        // ÖØ»æGUI
+        // é‡ç»˜GUI
         //drawEnumIdx = EditorGUI.Popup(position, label.text, drawEnumIdx, drawEnum.ToArray());
         drawEnumIdx = EditorGUI.Popup(_position, _label, drawEnumIdx, guiContentArray.ToArray());
 
-        //»ñÈ¡Ñ¡ÖĞÃ¶¾ÙÄÚÈİ
+        //è·å–é€‰ä¸­æšä¸¾å†…å®¹
         string selectedEnum = drawEnum[ drawEnumIdx ];
         
-        //»ñÈ¡¸ÃÃ¶¾ÙÄÚÈİÔÚÊµ¼ÊÃ¶¾ÙÖĞµÄË÷Òı
+        //è·å–è¯¥æšä¸¾å†…å®¹åœ¨å®é™…æšä¸¾ä¸­çš„ç´¢å¼•
         int index = Array.IndexOf( values , selectedEnum );
-        //ÉèÖÃÃ¶¾Ù
+        //è®¾ç½®æšä¸¾
         if (EditorGUI.EndChangeCheck() && index != -1) _property.enumValueIndex = index;
     }
-    //ÏÔÊ¾ÓÃÃ¶¾ÙµÄË÷Òı
+    //æ˜¾ç¤ºç”¨æšä¸¾çš„ç´¢å¼•
     private int drawEnumIdx = -1;
 
     public override float GetPropertyHeight(SerializedProperty _property, GUIContent _label)
@@ -303,12 +303,12 @@ public class RenameDrawer : PropertyDrawer
 [CustomPropertyDrawer(typeof(TitleAttribute))]
 public class TitleAttributeDrawer : DecoratorDrawer
 {
-    // ÎÄ±¾ÑùÊ½
+    // æ–‡æœ¬æ ·å¼
     private GUIStyle style = new GUIStyle(EditorStyles.label);
 
     public override void OnGUI(Rect _position)
     {
-        // »ñÈ¡Attribute
+        // è·å–Attribute
         TitleAttribute title = (TitleAttribute)attribute;
 
         if( title.useHorizontalLine_ )
@@ -319,7 +319,7 @@ public class TitleAttributeDrawer : DecoratorDrawer
         style.fixedHeight = title.useHorizontalLine_ ? 50 : 25;
         style.normal.textColor = HtmlToColor.Change(title.htmlColor_);
         style.fontSize = 13;
-        // ÖØ»æGUI
+        // é‡ç»˜GUI
         _position = EditorGUI.IndentedRect(_position);
         GUI.Label(_position, title.title_, style);
     }
@@ -367,14 +367,14 @@ public static class HorizontalLine
 public static class HtmlToColor
 {
     /// <summary>
-    /// HtmlÑÕÉ«×ª»»ÎªColor
+    /// Htmlé¢œè‰²è½¬æ¢ä¸ºColor
     /// </summary>
     public static Color Change(string _hex)
     {
-        // ±à¼­Æ÷Ä¬ÈÏÑÕÉ«
+        // ç¼–è¾‘å™¨é»˜è®¤é¢œè‰²
         if (string.IsNullOrEmpty(_hex)) return new Color(0.705f, 0.705f, 0.705f);
 
-        // ×ª»»ÑÕÉ«
+        // è½¬æ¢é¢œè‰²
         _hex = _hex.ToLower();
         if (_hex.IndexOf("#") == 0 && _hex.Length == 7)
         {

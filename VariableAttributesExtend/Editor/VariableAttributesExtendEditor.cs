@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
@@ -32,14 +32,14 @@ public class VariableAttributesExtendEditor : Editor
 
 	void OnEnable()
 	{
-		// »ñÈ¡ÀàĞÍºÍ¿ÉĞòÁĞ»¯ÊôĞÔ
+		// è·å–ç±»å‹å’Œå¯åºåˆ—åŒ–å±æ€§
 		Type type = target.GetType();
 		List<FieldInfo> fields = new List<FieldInfo>();
 		FieldInfo[] array = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
 		fields.AddRange(array);
 
 		var types = new List<Type>();
-		// »ñÈ¡¸¸ÀàµÄ¿ÉĞòÁĞ»¯ÊôĞÔ
+		// è·å–çˆ¶ç±»çš„å¯åºåˆ—åŒ–å±æ€§
 		while (IsTypeCompatible(type.BaseType) && type != type.BaseType)
 		{
 			types.Add( type );
@@ -50,10 +50,10 @@ public class VariableAttributesExtendEditor : Editor
 
 		if( fields.Count > 0 )
         {
-			//É¾³ı·ÇĞòÁĞ»¯ÄÚÈİ
+			//åˆ é™¤éåºåˆ—åŒ–å†…å®¹
 			for (int nCnt = fields.Count - 1; nCnt >= 0; nCnt--)
 			{
-				// ·Ç¹«ÓĞ²¢ÇÒÃ»ÓĞÌí¼Ó[SerializeField]ÌØĞÔµÄÊôĞÔ
+				// éå…¬æœ‰å¹¶ä¸”æ²¡æœ‰æ·»åŠ [SerializeField]ç‰¹æ€§çš„å±æ€§
 				if (!fields[nCnt].IsPublic)
 				{
 					object[] serials = fields[nCnt].GetCustomAttributes(typeof(SerializeField), true);
@@ -64,7 +64,7 @@ public class VariableAttributesExtendEditor : Editor
 				}
 				else
 				{
-					//¹«ÓĞµ«ÊÇÌí¼ÓÁË[HideInInspector]ÌØĞÔµÄÊôĞÔ
+					//å…¬æœ‰ä½†æ˜¯æ·»åŠ äº†[HideInInspector]ç‰¹æ€§çš„å±æ€§
 					object[] hides = fields[nCnt].GetCustomAttributes(typeof(HideInInspector), true);
 					if (hides.Length != 0)
 					{
@@ -73,10 +73,10 @@ public class VariableAttributesExtendEditor : Editor
 				}
 			}
 
-			//ÅÅÁĞ
+			//æ’åˆ—
 			objectFields_ = fields;
 
-			//AttributesArray³õÆÚ»¯
+			//AttributesArrayåˆæœŸåŒ–
 			foreach (var field in objectFields_)
 			{
 				if (!attributesArray_.ContainsKey(field.DeclaringType))
@@ -92,7 +92,7 @@ public class VariableAttributesExtendEditor : Editor
 
 	private void OnDisable()
 	{
-		//½â·Å
+		//è§£æ”¾
 		if( attributesArray_ != null )
         {
 			foreach (var attribute in attributesArray_)
@@ -162,7 +162,7 @@ public class VariableAttributesExtendEditor : Editor
 
 	private void DrawGUI()
     {
-		//Ã»ÓĞĞòÁĞ»¯ÄÚÈİÔò²»ĞèÒª×Ô¶¨ÒåäÖÈ¾		
+		//æ²¡æœ‰åºåˆ—åŒ–å†…å®¹åˆ™ä¸éœ€è¦è‡ªå®šä¹‰æ¸²æŸ“		
 		if (attributesArray_.Count == 0)
 		{
 			DrawDefaultInspector();
@@ -239,14 +239,14 @@ public class VariableAttributesExtendEditor : Editor
         {
 			if (_count == 0)
 			{
-				//Ê¹ÓÃ·Ö¸îÏß
+				//ä½¿ç”¨åˆ†å‰²çº¿
 				if (category.Value.useHorizontalLine)
 				{
 					EditorGUILayout.Space();
 					HorizontalLine.Create(0);
 					EditorGUILayout.Space();
 				}
-				//Ê¹ÓÃ±êÇ©
+				//ä½¿ç”¨æ ‡ç­¾
 				if (category.Value.titleName != null)
 				{
 					EditorGUILayout.LabelField(category.Value.titleName, categorryTitleStyle_);
