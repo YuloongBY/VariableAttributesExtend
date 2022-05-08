@@ -98,12 +98,14 @@ public class HideEnumAttribute : PropertyAttribute
 #endif
 public class RenameAttribute : PropertyAttribute
 {
-    public string name_      = "";
-    public string htmlColor_ = "#000000";
+    public string name_       = "";
+    public string htmlColor_  = "#000000";
+    public bool   isReadOnly_ = false;
 
     /// <summary> Rename </summary>
     /// <param name="_name">New name</param>
-    public RenameAttribute( string _name )
+    /// <param name="_isReadOnly">Read Only</param>
+    public RenameAttribute( string _name , bool _isReadOnly = false )
     {
         this.name_ = _name;
 #if UNITY_EDITOR
@@ -111,15 +113,18 @@ public class RenameAttribute : PropertyAttribute
 #else
         this.htmlColor_ = "#000000";
 #endif
+        this.isReadOnly_ = _isReadOnly;
     }
 
     /// <summary> Rename </summary>
     /// <param name="_name">New name</param>
     /// <param name="_htmlColor">Text color (For example："#FFFFFF" or "black")</param>
-    public RenameAttribute( string _name , string _htmlColor )
+    /// <param name="_isReadOnly">Read Only</param>
+    public RenameAttribute( string _name , string _htmlColor , bool _isReadOnly = false )
     {
-        this.name_      = _name;
-        this.htmlColor_ = _htmlColor;
+        this.name_       = _name;
+        this.htmlColor_  = _htmlColor;
+        this.isReadOnly_ = _isReadOnly;
     }
 }
 
@@ -190,12 +195,16 @@ public class RenameDrawer : PropertyDrawer
         //保存当前颜色
         Color defaultColor = EditorStyles.label.normal.textColor;
 
+        //ReadOnly?
+        bool isReadOnly = false;
+
         // 替换属性名称        
         if( attribute is RenameAttribute )
         {
             //重命名
             RenameAttribute rename = (RenameAttribute)attribute;
             _label.text = rename.name_;
+            isReadOnly  = rename.isReadOnly_;
             
             //重绘GUI
             EditorStyles.label.normal.textColor = HtmlToColor.Change( rename.htmlColor_ );
@@ -213,7 +222,9 @@ public class RenameDrawer : PropertyDrawer
         //一般
         else
         { 
+            GUI.enabled = !isReadOnly;
             EditorGUI.PropertyField( _position , _property , _label , true );                            
+            GUI.enabled = true;
         }
 
         //颜色重置
