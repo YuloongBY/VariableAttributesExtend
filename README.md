@@ -38,8 +38,17 @@ public class SampleBase : MonoBehaviour
     public int parameter0 = 0;
 
     //Rename + Color
-    [Rename("#Param1", "red")]
+    [Rename("#Param1" , "red")]
     public int parameter1 = 1;
+    
+    /*
+    New funcation by Ver1.1.0
+    */
+    
+    //Rename + ReadOnly
+    [Rename("Rename" , true )]
+    //Rename + Color + ReadOnly
+    [Rename("Rename" , "red" , true )]   
 }
 ```
 ### HorizontalLine
@@ -70,7 +79,7 @@ public class SampleBase : MonoBehaviour
     public int parameter1 = 1;
 
     //Title + Color + SplitLine
-    [Title("[Title2]", "red" , true)]
+    [Title("[Title2]" , "red" , true)]
     public int parameter2 = 2;
 }
 ```
